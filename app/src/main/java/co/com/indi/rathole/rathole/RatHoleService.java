@@ -2,6 +2,7 @@ package co.com.indi.rathole.rathole;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -12,8 +13,8 @@ import android.widget.Toast;
 public class RatHoleService extends Service {
 
     private static final String TAG = "RatHoleService";
-    private MediaPlayer player;
     private boolean isRunning = false;
+    private MediaPlayer player;
 
     @Override
     public void onCreate() {
@@ -33,35 +34,51 @@ public class RatHoleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //int a =  super.onStartCommand(intent, flags, startId);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    try{
-                        Thread.sleep(1000);
-                    }catch (Exception e){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; i < 5; i++) {
+//                    try{
+//                        Thread.sleep(1000);
+//                    }catch (Exception e){
+//
+//                    }
+//
+//                    if(isRunning){
+//                        Log.i(TAG, "Service Thread ok");
+//                    }
+//                }
+//            }
+//        }).start();
+//
+//        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
+//        player.setLooping(true);
+//        player.start();
 
-                    }
+        Log.i(TAG, "onStartCommand-->Service Started");
+        registerReceiver(new PhoneUnlockReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
 
-                    if(isRunning){
-                        Log.i(TAG, "Service Thread ok");
-                    }
-                }
-            }
-        }).start();
 
-        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
-        player.setLooping(true);
-        player.start();
-        //Toast.makeText(this, "service start", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         isRunning = false;
-        //Toast.makeText(this, "service stop", Toast.LENGTH_SHORT).show();
-        if(player != null)
+        Log.i(TAG, "onDestroy-->Service Stoped");
+        stopAlarm();
+    }
+
+    public void startAlarm(){
+        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
+        player.setLooping(true);
+        player.start();
+    }
+
+    public void  stopAlarm(){
+        if(player != null){
             player.stop();
+        }
     }
 }

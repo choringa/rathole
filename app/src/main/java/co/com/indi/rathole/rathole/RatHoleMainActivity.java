@@ -15,8 +15,8 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rat_hole_main);
 
-        counterStart = findViewById(R.id.main_activity_counter_btn_start);
-        counterStop = findViewById(R.id.main_activity_counter_btn_stop);
+        counterStart = findViewById(R.id.main_activity_service_btn_start);
+        counterStop = findViewById(R.id.main_activity_service_btn_stop);
 
         counterStart.setOnClickListener(this);
         counterStop.setOnClickListener(this);
