@@ -22,9 +22,6 @@
             android:process=":RatHoleServiceProcess"
             android:exported="false" />
 
-        <service
-            android:name=".RatHoleIntentService"
-            android:exported="false"/>
     </application>
 
 </manifest>

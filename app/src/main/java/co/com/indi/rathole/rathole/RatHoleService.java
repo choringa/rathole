@@ -1,8 +1,11 @@
 package co.com.indi.rathole.rathole;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -15,6 +18,7 @@ public class RatHoleService extends Service {
     private static final String TAG = "RatHoleService";
     private boolean isRunning = false;
     private MediaPlayer player;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate() {
@@ -32,33 +36,10 @@ public class RatHoleService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //int a =  super.onStartCommand(intent, flags, startId);
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < 5; i++) {
-//                    try{
-//                        Thread.sleep(1000);
-//                    }catch (Exception e){
-//
-//                    }
-//
-//                    if(isRunning){
-//                        Log.i(TAG, "Service Thread ok");
-//                    }
-//                }
-//            }
-//        }).start();
-//
-//        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
-//        player.setLooping(true);
-//        player.start();
 
         Log.i(TAG, "onStartCommand-->Service Started");
+        sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences_key), MODE_PRIVATE);
         registerReceiver(new PhoneUnlockReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
-
-
         Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
         return START_STICKY;
     }
@@ -70,15 +51,33 @@ public class RatHoleService extends Service {
         stopAlarm();
     }
 
+    public void manageUnlockResult(){
+        addUnlockCounter();
+        if(sharedPreferences.getBoolean(getString(R.string.alarm_state_key), false)){
+            startAlarm();
+        }
+    }
+
     public void startAlarm(){
+//        AudioManager amanager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+//        int maxVolume = amanager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+//        amanager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
         player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
         player.setLooping(true);
+//        player.setAudioStreamType(AudioManager.STREAM_ALARM);
+        //player.setVolume(maxVolume, maxVolume);
         player.start();
     }
 
-    public void  stopAlarm(){
+    public void stopAlarm(){
         if(player != null){
             player.stop();
         }
+    }
+
+    public void addUnlockCounter(){
+        SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
+        int currentUnlockCounter = sharedPreferences.getInt(getString(R.string.unlock_counter_key), 0);
+        sharedPreferencesEditor.putInt(getString(R.string.unlock_counter_key), currentUnlockCounter+1).apply();
     }
 }

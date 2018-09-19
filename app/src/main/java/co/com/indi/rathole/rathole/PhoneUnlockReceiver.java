@@ -4,6 +4,7 @@ import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 public class PhoneUnlockReceiver extends BroadcastReceiver {
@@ -16,7 +17,7 @@ public class PhoneUnlockReceiver extends BroadcastReceiver {
         if (keyguardManager.isKeyguardSecure()) {
             Log.i(TAG, "onReceive-->1: Context: " + context.toString() + "; Intent: " + intent.toString());
             RatHoleService service = (RatHoleService) context;
-            service.startAlarm();
+            service.manageUnlockResult();
         }
         else{
             Log.i(TAG, "onReceive-->2");
