@@ -1,5 +1,6 @@
 package co.com.indi.rathole.rathole;
 
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class RatHoleMainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Button serviceStartBtn, serviceStopBtn, restartCounterBtn;
@@ -19,6 +22,7 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
     private TextView unlockCounterTextView;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor sharedPreferencesEditor;
+    private LottieAnimationView switchLottieAlarmAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
         emailSwitch = findViewById(R.id.main_activity_mail_switch);
         alarmSwitch = findViewById(R.id.main_activity_alarm_switch);
         pictureSwitch = findViewById(R.id.main_activity_picture_switch);
+        switchLottieAlarmAnimator = findViewById(R.id.main_activity_lottie_alarm_switch);
 
         serviceStartBtn.setOnClickListener(this);
         serviceStopBtn.setOnClickListener(this);
@@ -102,6 +107,22 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
         unlockCounterTextView.setText("0");
     }
 
+    private void startCheckAnimation() {
+        ValueAnimator animator = ValueAnimator.ofFloat(0f, 0.4f).setDuration(600);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                switchLottieAlarmAnimator.setProgress((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+
+        if (switchLottieAlarmAnimator.getProgress() == 0f) {
+            animator.start();
+        } else {
+            animator.start();
+        }
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if (compoundButton.equals(emailSwitch)) {
@@ -110,6 +131,7 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
         } else if (compoundButton.equals(alarmSwitch)) {
             sharedPreferencesEditor.putBoolean(getString(R.string.alarm_state_key), b);
             sharedPreferencesEditor.commit();
+            startCheckAnimation();
         } else if (compoundButton.equals(pictureSwitch)) {
             sharedPreferencesEditor.putBoolean(getString(R.string.picture_state_key), b);
             sharedPreferencesEditor.commit();

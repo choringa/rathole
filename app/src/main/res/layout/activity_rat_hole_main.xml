@@ -3,27 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RatHoleMainActivity">
 
-
-    <TextView
-        android:id="@+id/main_activity_title"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/main_activity_logo_relative_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="RAT_H0L3"
-        android:textSize="30sp" />
+        android:paddingEnd="15dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/main_activity_rat_icon"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_icono1_1"/>
+
+        <ImageView
+            android:id="@+id/main_activity_rat_letras"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/main_activity_rat_icon"
+            android:src="@drawable/ic_letras1_1"/>
+
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/main_activity_option_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/main_activity_title"
+        android:layout_below="@+id/main_activity_logo_relative_layout"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="30dp">
+
+            <TextView
+                android:id="@+id/main_activity_alarm_tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Alarm"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/main_activity_lottie_alarm_switch"
+                android:layout_weight="2"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="5dp"
+                app:lottie_fileName="toggle_switch2.json"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,6 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="30dp"
+            style="@style/boton_main_restart"
             android:text="Restart counter"
             android:textSize="13sp" />
 
