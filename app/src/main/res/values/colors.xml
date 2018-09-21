@@ -5,5 +5,6 @@
     <color name="colorAccent">#62ef62</color>
     <color name="backgroundAppColor">#000</color>
 
-    <color name="redPrimary">#f1f</color>
+    <color name="redPrimary">#f91643</color>
+    <color name="white">#ffffff</color>
 </resources>

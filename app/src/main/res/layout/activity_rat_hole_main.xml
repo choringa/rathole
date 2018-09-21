@@ -159,6 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
             style="@style/boton_main_restart"
             android:text="Restart counter"
             android:textSize="13sp" />
@@ -176,6 +177,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:text="Start"
+                style="@style/boton_main_start"
                 android:textSize="13sp" />
 
             <Button
@@ -184,6 +186,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:text="Stop"
+                style="@style/boton_main_stop"
                 android:textSize="13sp" />
         </LinearLayout>
 
