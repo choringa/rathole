@@ -25,8 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/main_activity_rat_icon"
             android:src="@drawable/ic_letras1_1"/>
-
-
     </RelativeLayout>
 
 
@@ -39,27 +37,28 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginEnd="30dp">
-
+            android:layout_marginEnd="20dp">
             <TextView
                 android:id="@+id/main_activity_alarm_tv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Alarm"/>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/main_activity_lottie_alarm_switch"
                 android:layout_weight="2"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginEnd="5dp"
-                app:lottie_fileName="toggle_switch2.json"/>
+                android:text="Alarm"/>
+            <RelativeLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/main_activity_lottie_alarm_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:background="@color/white"
+                    app:lottie_fileName="animation-w1200-h1200.json"/>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout

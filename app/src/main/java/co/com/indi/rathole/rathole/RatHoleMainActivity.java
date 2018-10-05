@@ -107,20 +107,31 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
         unlockCounterTextView.setText("0");
     }
 
-    private void startCheckAnimation() {
-        ValueAnimator animator = ValueAnimator.ofFloat(0f, 0.4f).setDuration(600);
+    private void checkAnimation() {
+        ValueAnimator animator = ValueAnimator.ofFloat(0.2f, 1f).setDuration(1500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 switchLottieAlarmAnimator.setProgress((Float) valueAnimator.getAnimatedValue());
             }
         });
+        animator.start();
+//        if (switchLottieAlarmAnimator.getProgress() == 0f) {
+//            animator.start();
+//        } else {
+//            animator.start();
+//        }
+    }
 
-        if (switchLottieAlarmAnimator.getProgress() == 0f) {
-            animator.start();
-        } else {
-            animator.start();
-        }
+    private void unCheckAnimation() {
+        ValueAnimator animator = ValueAnimator.ofFloat(1f, 0f).setDuration(1500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                switchLottieAlarmAnimator.setProgress((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+        animator.start();
     }
 
     @Override
@@ -131,7 +142,11 @@ public class RatHoleMainActivity extends AppCompatActivity implements View.OnCli
         } else if (compoundButton.equals(alarmSwitch)) {
             sharedPreferencesEditor.putBoolean(getString(R.string.alarm_state_key), b);
             sharedPreferencesEditor.commit();
-            startCheckAnimation();
+            if(b)
+                checkAnimation();
+            else
+                unCheckAnimation();
+
         } else if (compoundButton.equals(pictureSwitch)) {
             sharedPreferencesEditor.putBoolean(getString(R.string.picture_state_key), b);
             sharedPreferencesEditor.commit();
