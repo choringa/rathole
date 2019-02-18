@@ -2,7 +2,6 @@
     <string name="app_name">RatHole</string>
 
 
-
     <!-- SharedPreferences Key -->
     <string name="shared_preferences_key">ratHoleUserPreferences</string>
 
@@ -11,5 +10,8 @@
     <string name="email_state_key">emailStateKey</string>
     <string name="picture_state_key">pictureStateKey</string>
     <string name="alarm_state_key">alarmStateKey</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

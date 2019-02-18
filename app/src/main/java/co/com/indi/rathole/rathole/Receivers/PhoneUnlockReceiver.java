@@ -1,11 +1,12 @@
-package co.com.indi.rathole.rathole;
+package co.com.indi.rathole.rathole.Receivers;
 
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
+
+import co.com.indi.rathole.rathole.Services.RatHoleService;
 
 public class PhoneUnlockReceiver extends BroadcastReceiver {
 

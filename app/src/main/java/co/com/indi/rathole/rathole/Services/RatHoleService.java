@@ -1,17 +1,18 @@
-package co.com.indi.rathole.rathole;
+package co.com.indi.rathole.rathole.Services;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
+
+import co.com.indi.rathole.rathole.Receivers.PhoneUnlockReceiver;
+import co.com.indi.rathole.rathole.R;
 
 public class RatHoleService extends Service {
 

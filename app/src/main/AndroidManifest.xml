@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RatHoleMainActivity">
+        <activity android:name=".Activities.RatHoleMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Fragments.RatHoleServiceFragment"></activity>
 
         <service
-            android:name=".RatHoleService"
-            android:process=":RatHoleServiceProcess"
-            android:exported="false" />
-
+            android:name=".Services.RatHoleService"
+            android:exported="false"
+            android:process=":RatHoleServiceProcess" />
     </application>
 
 </manifest>
