@@ -3,53 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.RatHoleServiceFragment">
 
     <RelativeLayout
         android:id="@+id/main_activity_logo_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingEnd="15dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingEnd="15dp">
 
         <ImageView
             android:id="@+id/main_activity_rat_icon"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_icono1_1"/>
+            android:src="@drawable/ic_icono1_1" />
 
         <ImageView
             android:id="@+id/main_activity_rat_letras"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/main_activity_rat_icon"
-            android:src="@drawable/ic_letras1_1"/>
+            android:src="@drawable/ic_letras1_1" />
     </RelativeLayout>
-
 
     <LinearLayout
         android:id="@+id/main_activity_option_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_activity_logo_relative_layout"
-        android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="2"
                 android:text="Unlocks Counter" />
-
             <TextView
                 android:id="@+id/main_activity_counter_tv"
                 android:layout_width="wrap_content"
@@ -58,113 +53,35 @@
                 android:layout_weight="2"
                 android:gravity="end"
                 android:text="0" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="2"
-                android:text="Alarm" />
-
-            <Switch
-                android:id="@+id/main_activity_alarm_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="2"
-                android:layout_gravity="center" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="2"
-                android:text="Mail" />
-
-            <Switch
-                android:id="@+id/main_activity_mail_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="2"
-                android:layout_gravity="center" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="2"
-                android:text="Picture" />
-
-            <Switch
-                android:id="@+id/main_activity_picture_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="2"
-                android:layout_gravity="center" />
-
         </LinearLayout>
 
         <Button
             android:id="@+id/main_activity_restart_btn"
+            style="@style/boton_main_restart"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp"
-            style="@style/boton_main_restart"
             android:text="Restart counter"
             android:textSize="13sp" />
 
-        <LinearLayout
-            android:id="@+id/main_activity_services_buttons"
+        <Button
+            android:id="@+id/main_activity_service_btn_start"
+            style="@style/boton_main_start"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Start Service"
+            android:textSize="13sp" />
 
-            <Button
-                android:id="@+id/main_activity_service_btn_start"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:text="Start"
-                style="@style/boton_main_start"
-                android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/main_activity_service_btn_stop"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:text="Stop"
-                style="@style/boton_main_stop"
-                android:textSize="13sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/main_activity_service_btn_stop"
+            style="@style/boton_main_stop"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Stop Service"
+            android:textSize="13sp" />
 
     </LinearLayout>
 

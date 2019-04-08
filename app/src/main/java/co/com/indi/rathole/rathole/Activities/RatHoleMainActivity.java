@@ -1,9 +1,9 @@
 package co.com.indi.rathole.rathole.Activities;
 
+import android.app.ActivityManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
 
 import co.com.indi.rathole.rathole.Adapters.CustomPagerAdapter;
@@ -16,8 +16,8 @@ public class RatHoleMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rat_hole_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_main_activity);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar_main_activity);
+//        setSupportActionBar(toolbar);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = findViewById(R.id.viewpager_main_activity);

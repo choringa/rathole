@@ -1,91 +1,82 @@
 package co.com.indi.rathole.rathole.Fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import co.com.indi.rathole.rathole.R;
 import co.com.indi.rathole.rathole.Services.RatHoleService;
+import co.com.indi.rathole.rathole.Utils.Constants;
+import co.com.indi.rathole.rathole.Utils.UtilMethods;
 
-public class RatHoleServiceFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class RatHoleServiceFragment extends Fragment implements View.OnClickListener {
 
     private Button serviceStartBtn, serviceStopBtn, restartCounterBtn;
-    private Switch emailSwitch, alarmSwitch, pictureSwitch;
     private TextView unlockCounterTextView;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor sharedPreferencesEditor;
-    //private LottieAnimationView switchLottieAlarmAnimator;
+    private boolean isServiceRunning;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rat_hole_service, container, false);
+        isServiceRunning = UtilMethods.isServiceRunning(RatHoleService.class, getContext());
         initViews(view);
-        //TODO: Fix.
-        //initPreferences();
+        initPreferences();
         return  view;
     }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_rat_hole_service);
-//        sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences_key), MODE_PRIVATE);
-//        sharedPreferencesEditor = sharedPreferences.edit();
-//        initViews();
-//        initPreferences();
-//    }
 
     private void initViews(View view) {
         serviceStartBtn = view.findViewById(R.id.main_activity_service_btn_start);
         serviceStopBtn = view.findViewById(R.id.main_activity_service_btn_stop);
         restartCounterBtn = view.findViewById(R.id.main_activity_restart_btn);
         unlockCounterTextView = view.findViewById(R.id.main_activity_counter_tv);
-        emailSwitch = view.findViewById(R.id.main_activity_mail_switch);
-        alarmSwitch = view.findViewById(R.id.main_activity_alarm_switch);
-        pictureSwitch = view.findViewById(R.id.main_activity_picture_switch);
-        //switchLottieAlarmAnimator = findViewById(R.id.main_activity_lottie_alarm_switch);
+
+        toogleServiceVisibility(isServiceRunning);
 
         serviceStartBtn.setOnClickListener(this);
         serviceStopBtn.setOnClickListener(this);
         restartCounterBtn.setOnClickListener(this);
-        emailSwitch.setOnCheckedChangeListener(this);
-        alarmSwitch.setOnCheckedChangeListener(this);
-        pictureSwitch.setOnCheckedChangeListener(this);
     }
 
 
     private void initPreferences() {
-        int unlockCounter = sharedPreferences.getInt(getContext().getString(R.string.unlock_counter_key), 0);
+        sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
+        sharedPreferencesEditor = sharedPreferences.edit();
+        int unlockCounter = sharedPreferences.getInt(Constants.UNLOCK_COUNTER_KEY, 0);
         unlockCounterTextView.setText(unlockCounter + "");
-
-        boolean emailState = sharedPreferences.getBoolean(getString(R.string.email_state_key), false);
-        emailSwitch.setChecked(emailState);
-
-        boolean alarmState = sharedPreferences.getBoolean(getString(R.string.alarm_state_key), false);
-        alarmSwitch.setChecked(alarmState);
-
-        boolean pictureState = sharedPreferences.getBoolean(getString(R.string.picture_state_key), false);
-        pictureSwitch.setChecked(pictureState);
     }
 
+    private void toogleServiceVisibility(boolean isServiceRunning){
+        if(isServiceRunning){
+            serviceStartBtn.setVisibility(View.GONE);
+            serviceStopBtn.setVisibility(View.VISIBLE);
+        }
+        else{
+            serviceStartBtn.setVisibility(View.VISIBLE);
+            serviceStopBtn.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public void onClick(View view) {
         if (view == serviceStartBtn) {
             getContext().startService(new Intent(getContext(), RatHoleService.class));
+            toogleServiceVisibility(true);
         } else if (view == serviceStopBtn) {
             getContext().stopService(new Intent(getContext(), RatHoleService.class));
+            toogleServiceVisibility(false);
         } else if (view == restartCounterBtn) {
             showConfirmationDialog();
         }
@@ -114,54 +105,9 @@ public class RatHoleServiceFragment extends Fragment implements View.OnClickList
 
 
     private void resetUnlockCounter() {
-        sharedPreferencesEditor.putInt(getString(R.string.unlock_counter_key), 0);
+        sharedPreferencesEditor.putInt(Constants.UNLOCK_COUNTER_KEY, 0);
         sharedPreferencesEditor.commit();
         unlockCounterTextView.setText("0");
     }
 
-    private void checkAnimation() {
-//        ValueAnimator animator = ValueAnimator.ofFloat(0.2f, 1f).setDuration(1500);
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                switchLottieAlarmAnimator.setProgress((Float) valueAnimator.getAnimatedValue());
-//            }
-//        });
-//        animator.start();
-//        if (switchLottieAlarmAnimator.getProgress() == 0f) {
-//            animator.start();
-//        } else {
-//            animator.start();
-//        }
-    }
-
-    private void unCheckAnimation() {
-//        ValueAnimator animator = ValueAnimator.ofFloat(1f, 0f).setDuration(1500);
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                switchLottieAlarmAnimator.setProgress((Float) valueAnimator.getAnimatedValue());
-//            }
-//        });
-//        animator.start();
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if (compoundButton.equals(emailSwitch)) {
-            sharedPreferencesEditor.putBoolean(getString(R.string.email_state_key), b);
-            sharedPreferencesEditor.commit();
-        } else if (compoundButton.equals(alarmSwitch)) {
-            sharedPreferencesEditor.putBoolean(getString(R.string.alarm_state_key), b);
-            sharedPreferencesEditor.commit();
-//            if(b)
-//                checkAnimation();
-//            else
-//                unCheckAnimation();
-
-        } else if (compoundButton.equals(pictureSwitch)) {
-            sharedPreferencesEditor.putBoolean(getString(R.string.picture_state_key), b);
-            sharedPreferencesEditor.commit();
-        }
-    }
 }

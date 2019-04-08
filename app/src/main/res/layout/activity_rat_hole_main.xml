@@ -8,22 +8,11 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".Activities.RatHoleMainActivity">
 
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar_main_activity"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:background="?attr/colorPrimary"
-    android:elevation="6dp"
-    android:minHeight="?attr/actionBarSize"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
 <android.support.v4.view.ViewPager
     android:id="@+id/viewpager_main_activity"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/toolbar_main_activity"/>
+    android:layout_height="wrap_content" />
+    <!--android:layout_below="@id/toolbar_main_activity"/>-->
 
 <android.support.design.widget.TabLayout
     android:id="@+id/tab_layout_main_activity"
@@ -32,9 +21,9 @@ tools:context=".Activities.RatHoleMainActivity">
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
     android:elevation="6dp"
-    app:tabTextColor="#d3d3d3"
-    app:tabSelectedTextColor="#ffffff"
-    app:tabIndicatorColor="#ff00ff"
+    app:tabTextColor="@color/white"
+    app:tabSelectedTextColor="@color/colorAccent"
+    app:tabIndicatorColor="@color/colorAccent"
     android:minHeight="?attr/actionBarSize"
     android:layout_alignParentBottom="true"
     />
